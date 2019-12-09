@@ -52,6 +52,18 @@ if (exists(closestEnemy) && getDistanceTo(closestEnemy) <= 5)
     type = "Entity"
     description = "The entity to teleport to (can be friend or foe). If specified, then you do not need to specify `xCoord` or `yCoord`."
 
+[taunt]
+description = "Taunts your enemy by wasting a turn to show an emoji."
+
+  [taunt.bljs]
+  example = "taunt('LAUGHING');"
+
+    [[taunt.bljs.tags]]
+    kind = "param"
+    name = "emojiCode"
+    type = "string"
+    description = "An optional emoji code from `LAUGHING`, `ANGRY`, `CRYING`, `THUMBS_UP`, or `THUMBS_DOWN`. If not provided, a random one will be chosen."
+
 [figureItOut]
 description = "The default logic for a bot. This will try using all different hardware (weapons and support abilities), find enemies, move, etc. This can be added to any partial script, but keep in mind that it may try doing something that you don't want. For example, if you do NOT want to fire lasers, then you should not add `figureItOut`."
 
@@ -274,15 +286,3 @@ if (exists(closestEnemy))
     name = "entity"
     type = "Entity"
     description = "An optional foe to attack."
-
-[taunt]
-description = "Taunts your enemy by wasting a turn to show an emoji."
-
-  [taunt.bljs]
-  example = "taunt('LAUGHING');"
-
-    [[taunt.bljs.tags]]
-    kind = "param"
-    name = "emojiCode"
-    type = "string"
-    description = "An optional emoji code from `LAUGHING`, `ANGRY`, `CRYING`, `THUMBS_UP`, or `THUMBS_DOWN`. If not provided, a random one will be chosen."
