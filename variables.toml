@@ -1,0 +1,23 @@
+[x]
+description = "The X coordinate of the user. 0 represents the left side of the Arena, and `arenaWidth - 1` represents the right side."
+
+[y]
+description = "The Y coordinate of the user. 0 represents the top of the Arena, and `arenaHeight - 1` represents the bottom."
+
+[life]
+description = "The current life of the user. Bots have 2000 maximum life."
+
+[lifePercent]
+description = "The current life percentage of the user. This is a number between `0` and `100`, e.g. `75` represents 75% life."
+
+[isAttacker]
+description = "A boolean representing whether the user is an attacker or a defender. Blueprints and scripts cannot be shared between attackers and defenders, but some examples or snippets that you'll find in Bot Land are agnostic to which side you're on. You should typically have no reason to use this."
+
+[turnNumber]
+description = "The total number of turns that have occurred since the beginning of the round. This starts at 0 for each round and will go up every time any bot gets a turn (including the enemy's bots)."
+
+[arenaWidth]
+description = "The width of the Arena. The rightmost navigable tile has an X coordinate of `arenaWidth - 1`."
+
+[arenaHeight]
+description = "The height of the Arena. The bottommost navigable tile has a Y coordinate of `arenaHeight - 1`."

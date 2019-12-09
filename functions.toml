@@ -1,0 +1,843 @@
+[getX]
+description = "Gets the X coordinate of an `Entity`. This is the same as `entity.x` in code."
+
+  [getX.bljs]
+  example = "getX(entity)"
+
+    [[getX.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The target entity"
+
+[getY]
+description = "Gets the Y coordinate of an `Entity`. This is the same as `entity.y` in code."
+
+  [getY.bljs]
+  example = "getY(entity)"
+
+    [[getY.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The target entity"
+
+[getLife]
+description = "Gets the current life of an `Entity`. This is the same as `entity.life` in code. Bots have 2000 max life, chips have 4000, and the CPU has 16000."
+
+  [getLife.bljs]
+  example = "getLife(entity)"
+
+    [[getLife.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The target entity"
+
+[getLifePercent]
+description = "Gets the current life percentage of an `Entity`. This returns a number between `0` and `100`, e.g. `75` represents 75% life."
+
+  [getLifePercent.bljs]
+  example = "getLifePercent(entity)"
+
+    [[getLifePercent.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The target entity"
+
+[canTeleport]
+description = "Checks if the user can [teleport](TERMINATORS:teleport). For this to return `true`, the user must have Teleport hardware that is not on cooldown, and the target must be within Teleport range. This also returns `true` if the target is an entity and the closest *unoccupied* tile is within Teleport range."
+
+  [[canTeleport.bljs]]
+  example = """
+// With coordinates...
+if (canTeleport(x + 5, y))
+  teleport(x + 5, y);
+"""
+
+    [[canTeleport.bljs.tags]]
+    kind = "param"
+    name = "xCoord"
+    type = "number"
+    description = "The X coordinate of the tile to teleport to"
+
+    [[canTeleport.bljs.tags]]
+    kind = "param"
+    name = "yCoord"
+    type = "number"
+    description = "The Y coordinate of the tile to teleport to"
+
+  [[canTeleport.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy) && canTeleport(closestEnemy))
+  teleport(closestEnemy);
+"""
+
+    [[canTeleport.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The entity to teleport to (can be friend or foe). If specified, then you do not need to specify `xCoord` or `yCoord`."
+
+[canMove]
+description = "Checks if the user can [move](TERMINATORS:move). This returns `true` when a given tile is believed by the user to be unoccupied."
+
+  [canMove.bljs]
+  example = """
+if (canMove('left'))
+  move('left');
+"""
+
+    [[canMove.bljs.tags]]
+    kind = "param"
+    name = "direction"
+    type = "Direction"
+    description = "Any of: `right`, `left`, `up`, `down`, `forward`, `backward`, or leave blank to check *all* directions"
+
+[canMoveTo]
+description = "Checks if the user can [moveTo](TERMINATORS:moveTo) a tile or target. If an entity is specified, then the entire path from the user must be visible by the user for this to return `true`. For example, checking `canMoveTo` for an enemy on the other side of the Arena will return `false` even if there are no obstacles."
+
+  [[canMoveTo.bljs]]
+  example = """
+// With coordinates...
+if (canMoveTo(x + 5, y))
+  moveTo(x + 5, y);
+"""
+
+    [[canMoveTo.bljs.tags]]
+    kind = "param"
+    name = "xCoord"
+    type = "number"
+    description = "The X coordinate of the tile to move to"
+
+    [[canMoveTo.bljs.tags]]
+    kind = "param"
+    name = "yCoord"
+    type = "number"
+    description = "The Y coordinate of the tile to move to"
+
+  [[canMoveTo.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy) && canMoveTo(closestEnemy))
+  moveTo(closestEnemy);
+"""
+
+    [[canMoveTo.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The entity to move to (can be friend or foe). If specified, then you do not need to specify `xCoord` or `yCoord`."
+
+[canEMP]
+description = "Checks if the user can use [EMP](TERMINATORS:EMP). For this to return `true`, the user must have EMP hardware that is not on cooldown."
+
+  [canEMP.bljs]
+  example = """
+if (canEMP('LASERS'))
+  EMP('LASERS');
+"""
+
+    [[canEMP.bljs.tags]]
+    kind = "param"
+    name = "hardware"
+    type = "string"
+    description = "Any of: `LASERS`, `MISSILES`, `MELEE`, `ARTILLERY`, `ZAPPER`, `REPAIR`, `CLOAKING`, `SHIELD`, `REFLECT`, `TELEPORT`, `LANDMINES`, or `EMP`. This argument is only checked for correctness and otherwise has no impact. E.g. it will return false if you mistype `LASERS` as `LASRERS`, but all valid parameters should result in the same return value as one another."
+
+[canEmp]
+description = ""
+alias = "canEMP"
+
+[canCloak]
+description = "Checks if the user can [cloak](TERMINATORS:cloak). For this to return `true`, the user must have Cloaking hardware that is not on cooldown. This does *not* check if the user is already cloaked."
+
+  [canCloak.bljs]
+  example = """
+if (canCloak() && !isCloaked())
+  cloak();
+"""
+
+[canCharge]
+description = "Checks if the user can [charge](TERMINATORS:melee). For this to return `true`, the user must have Melee hardware whose corresponding Charge is not on cooldown. This does *not* require there to be a valid Melee target two tiles away from the user in a cardinal direction; for that, use [willMeleeHit](FUNCTIONS:willMeleeHit)."
+
+  [canCharge.bljs]
+  example = """
+if (canCharge())
+  potentialAttackDistance = 2;
+"""
+
+[canZap]
+description = "Checks if the user can [zap](TERMINATORS:zap). For this to return `true`, the user must have Zapper hardware that is not on cooldown."
+
+  [canZap.bljs]
+  example = """
+if (canZap())
+  zap();
+"""
+
+[canReflect]
+description = "Checks if the user can [reflect](TERMINATORS:reflect). For this to return `true`, the user must have Reflect hardware that is not on cooldown."
+
+  [canReflect.bljs]
+  example = """
+if (canReflect())
+  reflect();
+"""
+
+[canShield]
+description = "Checks if the user can [shield](TERMINATORS:shield). For this to return `true`, the user must have Shield hardware that is not on cooldown."
+
+  [canShield.bljs]
+  example = """
+if (canShield())
+  shield();
+"""
+
+    [[canShield.bljs.tags]]
+    kind = "param"
+    name = "target"
+    type = "Entity"
+    description = "If specified, this will check if the target can be shielded. If unspecified, this will check if the user can be shielded."
+
+[willRepair]
+description = "Checks if the user can [repair](TERMINATORS:repair). This has different semantics based on which variety of Repair hardware is equipped. For regular Repair hardware, this returns `true` as long as the target is friendly and in range. For Area Repair hardware, this returns `true` as long as Area Repair is not on cooldown."
+
+  [willRepair.bljs]
+  example = """
+if (target.life < 1000 && willRepair(target))
+  repair(target);
+"""
+
+    [[willRepair.bljs.tags]]
+    kind = "param"
+    name = "target"
+    type = "Entity"
+    description = "If unspecified, the user will be provided for any checks (see the description above for an explanation about function semantics)."
+
+[canActivateSensors]
+description = "Checks if the user can [active their sensors](TERMINATORS:activateSensors). For this to return `true`, `activateSensors` must be off cooldown."
+
+  [canActivateSensors.bljs]
+  example = """
+if (canActivateSensors())
+  activateSensors();
+"""
+
+[canLayMine]
+description = "Checks if the user can [lay a landmine](TERMINATORS:layMine). For this to return `true`, the user must have Landmines hardware and the current tile must be free of landmines."
+
+  [canLayMine.bljs]
+  example = """
+if (canLayMine())
+  layMine();
+"""
+
+[isCloaked]
+description = "Checks if the user is [cloaked](TERMINATORS:cloak)."
+
+  [isCloaked.bljs]
+  example = """
+if (canCloak() && !isCloaked())
+  cloak();
+"""
+
+    [[isCloaked.bljs.tags]]
+    kind = "return"
+    type = "boolean"
+    description = "`true` if the user is cloaked."
+
+[isOnFire]
+description = "Checks if the user is on fire. Ignited entities take 100 damage per turn and are always visible even while cloaked. Applying a fire effect to an already ignited entity will cause the fire duration to increase *without* causing the damage per turn to increase."
+
+  [isOnFire.bljs]
+  example = """
+if (isOnFire())
+  move('backward');
+"""
+
+    [[isOnFire.bljs.tags]]
+    kind = "return"
+    type = "boolean"
+    description = "`true` if the user is on fire."
+
+[isZapping]
+description = "Checks if the user is [zapping](TERMINATORS:zap)."
+
+  [isZapping.bljs]
+  example = """
+if (isZapping())
+  move('forward');
+"""
+
+    [[isZapping.bljs.tags]]
+    kind = "return"
+    type = "boolean"
+    description = "`true` if the user is zapping."
+
+[areSensorsActivated]
+description = "Checks if the user's [sensors](TERMINATORS:activateSensors) are activated."
+
+  [areSensorsActivated.bljs]
+  example = """
+if (areSensorsActivated() && willArtilleryHit())
+  fireArtillery();
+"""
+
+    [[areSensorsActivated.bljs.tags]]
+    kind = "return"
+    type = "boolean"
+    description = "`true` if the user's sensors are activated."
+
+[isReflecting]
+description = "Checks if the user's [Reflect](TERMINATORS:reflect) field is activated."
+
+  [isReflecting.bljs]
+  example = """
+if (isReflecting())
+  move('forward');
+"""
+
+    [[isReflecting.bljs.tags]]
+    kind = "return"
+    type = "boolean"
+    description = "`true` if the user is reflecting."
+
+[isShielded]
+description = "Checks if the user has a [shield](TERMINATORS:shield)."
+
+  [isShielded.bljs]
+  example = """
+if (isShielded())
+  move('forward');
+"""
+
+    [[isShielded.bljs.tags]]
+    kind = "return"
+    type = "boolean"
+    description = "`true` if the user has an active shield."
+
+[distanceTo]
+description = ""
+alias = "getDistanceTo"
+
+[getDistanceTo]
+description = "Gets the distance to the tile or entity."
+
+  [[getDistanceTo.bljs]]
+  example = """
+// With coordinates...
+if (getDistanceTo(3, 2) < 10)
+  moveTo(3, 2);
+"""
+
+    [[getDistanceTo.bljs.tags]]
+    kind = "param"
+    name = "xCoord"
+    type = "number"
+    description = "The X coordinate of the tile to check"
+
+    [[getDistanceTo.bljs.tags]]
+    kind = "param"
+    name = "yCoord"
+    type = "number"
+    description = "The Y coordinate of the tile to check"
+
+  [[getDistanceTo.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy) && getDistanceTo(closestEnemy) < 5)
+  moveTo(closestEnemy);
+"""
+
+    [[getDistanceTo.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The entity to check (can be friend or foe). If specified, then you do not need to specify `xCoord` or `yCoord`."
+
+[getEntityAt]
+description = "Gets the entity at the given tile."
+
+  [getEntityAt.bljs]
+  example = "entityToMyRight = getEntityAt(x + 1, y);"
+
+    [[getEntityAt.bljs.tags]]
+    kind = "param"
+    name = "xCoord"
+    type = "number"
+    description = "The X coordinate of the tile to check"
+
+    [[getEntityAt.bljs.tags]]
+    kind = "param"
+    name = "yCoord"
+    type = "number"
+    description = "The Y coordinate of the tile to check"
+
+    [[getEntityAt.bljs.tags]]
+    kind = "return"
+    type = "Entity"
+    description = "The entity at the given tile or `null` if none exists."
+
+[percentChance]
+description = "Returns `true` according to the probability specified."
+
+  [percentChance.bljs]
+  example = """
+if (percentChance(50))
+  move('left');
+if (percentChance(15))
+  move('up');
+"""
+
+    [[percentChance.bljs.tags]]
+    kind = "param"
+    name = "percent"
+    type = "number"
+    description = "A number in the range `[0, 100]`."
+
+    [[percentChance.bljs.tags]]
+    kind = "return"
+    type = "boolean"
+    description = ""
+
+[randInt]
+description = "Generates a random integer within the given bounds."
+
+  [randInt.bljs]
+  example = """
+if (randInt(1, 5) === 4) // note: 5 cannot be generated here
+  move('left');
+"""
+
+    [[randInt.bljs.tags]]
+    kind = "param"
+    name = "lowerBound"
+    type = "number"
+    description = "An inclusive lowerbound."
+
+    [[randInt.bljs.tags]]
+    kind = "param"
+    name = "upperBound"
+    type = "number"
+    description = "An *exclusive* upperbound."
+
+    [[randInt.bljs.tags]]
+    kind = "return"
+    type = "number"
+    description = "A number in the range `[lowerBound, upperBound - 1]`."
+
+[randomInteger]
+description = ""
+alias = "randInt"
+
+[willMoveWork]
+description = ""
+alias = "canMove"
+
+[willMissilesHit]
+description = "Checks if the target will be hit by the user's [missiles](TERMINATORS:fireMissiles). For this to return `true`, the user must have Missiles hardware and the target must be in range. With Multi Missiles equipped, this will return `true` if *any* target can be hit."
+
+  [willMissilesHit.bljs]
+  example = """
+if (willMissilesHit(entity))
+  fireMissiles(entity);
+"""
+
+    [[willMissilesHit.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The target entity. If unspecified, this will check if *any* target within vision range would be hit by `fireMissiles`."
+
+[willArtilleryHit]
+description = "Checks if the target will be hit by the user's [artillery](TERMINATORS:fireArtillery). For this to return `true`, the user must have Artillery hardware and the target must be in range. Keep in mind that Artillery has a *minimum* range as well as a maximum range."
+
+  [willArtilleryHit.bljs]
+  example = """
+if (willArtilleryHit(entity))
+  fireArtillery(entity);
+"""
+
+    [[willArtilleryHit.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The target entity. If unspecified, this will check if *any* target within vision range would be hit by `fireArtillery`."
+
+[willLasersHit]
+description = "Checks if the target will be hit by the user's [lasers](TERMINATORS:fireLasers). For this to return `true`, the user must have Lasers hardware and the target must be in range."
+
+  [[willLasersHit.bljs]]
+  example = """
+// With a direction...
+if (willLasersHit('left'))
+  fireLasers('left');
+"""
+
+    [[willLasersHit.bljs.tags]]
+    kind = "param"
+    name = "direction"
+    type = "Direction"
+    description = "Any of: `right`, `left`, `up`, `down`, `forward`, `backward`, or leave blank to check if *any* direction would cause lasers to hit."
+
+  [[willLasersHit.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy) && willLasersHit(closestEnemy))
+  fireLasers(closestEnemy);
+"""
+
+    [[willLasersHit.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "A foe to attack. If specified, then you do not need to specify `direction`."
+
+[willMeleeHit]
+description = "Checks if the target will be hit by the user's [melee](TERMINATORS:melee). For this to return `true`, the user must have Melee hardware and the target must be in range."
+
+  [[willMeleeHit.bljs]]
+  example = """
+// With a direction...
+if (willMeleeHit('left'))
+  melee('left');
+"""
+
+    [[willMeleeHit.bljs.tags]]
+    kind = "param"
+    name = "direction"
+    type = "Direction"
+    description = "Any of: `right`, `left`, `up`, `down`, `forward`, `backward`, or leave blank to check if *any* direction would cause melee to hit."
+
+  [[willMeleeHit.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy) && willMeleeHit(closestEnemy))
+  melee(closestEnemy);
+"""
+
+    [[willMeleeHit.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "A foe to attack. If specified, then you do not need to specify `direction`."
+
+[isAdjacent]
+description = "Checks if the given tile or entity is adjacent to the user (this includes both cardinally and diagonally adjacent tiles)."
+
+  [[isAdjacent.bljs]]
+  example = """
+// With coordinates...
+if (isAdjacent(5, 4) && canZap())
+  zap();
+"""
+
+    [[isAdjacent.bljs.tags]]
+    kind = "param"
+    name = "xCoord"
+    type = "number"
+    description = "The X coordinate of the tile to check"
+
+    [[isAdjacent.bljs.tags]]
+    kind = "param"
+    name = "yCoord"
+    type = "number"
+    description = "The Y coordinate of the tile to check"
+
+  [[isAdjacent.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy) && isAdjacent(closestEnemy))
+  move('backward');
+"""
+
+    [[isAdjacent.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The entity to check (can be friend or foe). If specified, then you do not need to specify `xCoord` or `yCoord`."
+
+[filterEntities]
+description = "Given an array of entities, this will return a single entity that matches the given sort orders."
+
+  [filterEntities.bljs]
+  example = """
+// Find the closest ally with the lowest life.
+myBotsInRange = findEntities(IS_OWNED_BY_ME, BOT, false);
+repairTarget = filterEntities(myBotsInRange, [
+  SORT_BY_DISTANCE,
+  SORT_BY_LIFE
+], [
+  SORT_ASCENDING,
+  SORT_ASCENDING
+]);
+if (exists(repairTarget) && willRepair(repairTarget) && getLife(repairTarget) < 1800) {
+  repair(repairTarget);
+}
+"""
+
+    [[filterEntities.bljs.tags]]
+    kind = "param"
+    name = "entities"
+    type = "Array<Entity>"
+    description = "An array of entities to filter."
+
+    [[filterEntities.bljs.tags]]
+    kind = "param"
+    name = "sortBy"
+    type = "Array<EntitySortType>"
+    description = "Values in this array must be either `SORT_BY_DISTANCE` or `SORT_BY_LIFE`. Note that these are literal values, *not* strings."
+
+    [[filterEntities.bljs.tags]]
+    kind = "param"
+    name = "orders"
+    type = "Array<EntitySortOrder>"
+    description = "Values in this array must be either `SORT_ASCENDING` or `SORT_DESCENDING`. Note that these are literal values, *not* strings. The length of this array must match the length of `sortBy`."
+
+[reduceEntities]
+description = "This corresponds to `reduce` in functional programming; given an array of entities, this will collapse them all into a single value."
+
+  [reduceEntities.bljs]
+  example = """
+// Find how much life is missing amongst all friendly bots.
+// (this is great for Area Repair)
+friendlyBotsInRange = findEntitiesInRange(IS_OWNED_BY_ME, BOT, true, 3);
+totalMissingLife = reduceEntities(friendlyBotsInRange, REDUCE_BY_MISSING_LIFE);
+if (willRepair() && totalMissingLife > 150) {
+  repair();
+}
+"""
+
+    [[reduceEntities.bljs.tags]]
+    kind = "param"
+    name = "entities"
+    type = "Array<Entity>"
+    description = "An array of entities to reduce."
+
+    [[reduceEntities.bljs.tags]]
+    kind = "param"
+    name = "reduceBy"
+    type = "EntityReduceOption"
+    description = "The only possible value is currently `REDUCE_BY_MISSING_LIFE`."
+
+[size]
+description = "Returns the size (AKA count or length) of a collection."
+
+  [size.bljs]
+  example = """
+friendlyBotsInRange = findEntitiesInRange(IS_OWNED_BY_ME, BOT, true, 3);
+if (size(friendlyBotsInRange) > 3 && willRepair())
+  repair();
+"""
+
+    [[size.bljs.tags]]
+    kind = "param"
+    name = "collection"
+    type = "*"
+    description = "An array or object."
+
+[count]
+description = ""
+alias = "size"
+
+[findEntity]
+description = "Finds an enemy (e.g. a friendly bot, an enemy chip, etc.)."
+
+  [findEntity.bljs]
+  example = """
+// Pursue the closest enemy
+closestEnemy = findEntity(ENEMY, ANYTHING, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy)) {
+  pursue(closestEnemy);
+}
+"""
+
+    [[findEntity.bljs.tags]]
+    kind = "param"
+    name = "friendlyOrEnemy"
+    type = "EntityMatchFlags"
+    description = "Either `IS_OWNED_BY_ME` or `ENEMY`. Note that these are literal values, *not* strings."
+
+    [[findEntity.bljs.tags]]
+    kind = "param"
+    name = "type"
+    type = "EntityMatchFlags"
+    description = "A bitmasked combination of: `CHIP`, `CPU`, and `BOT`. For example, if you want bots and chips, specify `BOT | CHIP`. If you want everything, `ANYTHING` is an alias for `CPU | BOT | CHIP`. Note that these are literal values, *not* strings."
+
+    [[findEntity.bljs.tags]]
+    kind = "param"
+    name = "sortBy"
+    type = "EntitySortType"
+    description = "Any of: `SORT_BY_DISTANCE` or `SORT_BY_LIFE`. Note that these are literal values, *not* strings."
+
+    [[findEntity.bljs.tags]]
+    kind = "param"
+    name = "sortOrder"
+    type = "EntitySortOrder"
+    description = "Any of: `SORT_ASCENDING` or `SORT_DESCENDING`. Note that these are literal values, *not* strings."
+
+[findEntities]
+description = "Returns all entities in the user's vision range matching the parameters."
+
+  [findEntities.bljs]
+  example = "visibleFriendlyBots = findEntities(IS_OWNED_BY_ME, BOT, false);"
+
+    [[findEntities.bljs.tags]]
+    kind = "param"
+    name = "friendlyOrEnemy"
+    type = "EntityMatchFlags"
+    description = "Either `IS_OWNED_BY_ME` or `ENEMY`. Note that these are literal values, *not* strings."
+
+    [[findEntities.bljs.tags]]
+    kind = "param"
+    name = "type"
+    type = "EntityMatchFlags"
+    description = "A bitmasked combination of: `CHIP`, `CPU`, and `BOT`. For example, if you want bots and chips, specify `BOT | CHIP`. If you want everything, `ANYTHING` is an alias for `CPU | BOT | CHIP`. Note that these are literal values, *not* strings."
+
+    [[findEntities.bljs.tags]]
+    kind = "param"
+    name = "allowReturningSelf"
+    type = "boolean"
+    description = "If `true`, then this function can return the user itself assuming the other parameters allow for it."
+
+[findEntitiesInRange]
+description = "Returns all entities in a range up to the user's vision range matching the parameters."
+
+  [findEntitiesInRange.bljs]
+  example = "friendlyBotsInRange = findEntitiesInRange(IS_OWNED_BY_ME, BOT, false, 3);"
+
+    [[findEntitiesInRange.bljs.tags]]
+    kind = "param"
+    name = "friendlyOrEnemy"
+    type = "EntityMatchFlags"
+    description = "Either `IS_OWNED_BY_ME` or `ENEMY`. Note that these are literal values, *not* strings."
+
+    [[findEntitiesInRange.bljs.tags]]
+    kind = "param"
+    name = "type"
+    type = "EntityMatchFlags"
+    description = "A bitmasked combination of: `CHIP`, `CPU`, and `BOT`. For example, if you want bots and chips, specify `BOT | CHIP`. If you want everything, `ANYTHING` is an alias for `CPU | BOT | CHIP`. Note that these are literal values, *not* strings."
+
+    [[findEntitiesInRange.bljs.tags]]
+    kind = "param"
+    name = "allowReturningSelf"
+    type = "boolean"
+    description = "If `true`, then this function can return the user itself assuming the other parameters allow for it."
+
+    [[findEntitiesInRange.bljs.tags]]
+    kind = "param"
+    name = "range"
+    type = "number"
+    description = "The number of tiles to check. A value of `0` will only check the tile that the user is on."
+
+[findClosestEnemyBot]
+description = "A convenience function to find the closest enemy bot without having to specify extra parameters to [findEntities](FUNCTIONS:findEntities). Note that this returns `null` if there is no enemy bot visible to the user."
+
+[findClosestEnemyCpu]
+description = "A convenience function to find the enemy CPU without having to specify extra parameters to [findEntities](FUNCTIONS:findEntities). Note that this returns `null` if the CPU is not visible to the user."
+
+[findClosestFriendlyChip]
+description = "A convenience function to find the closest friendly chip without having to specify extra parameters to [findEntities](FUNCTIONS:findEntities). Note that this returns `null` if there is no friendly chip visible to the user."
+
+[findClosestEnemyChip]
+description = "A convenience function to find the closest enemy chip without having to specify extra parameters to [findEntities](FUNCTIONS:findEntities). Note that this returns `null` if there is no enemy chip visible to the user."
+
+[findClosestAlliedBot]
+description = "A convenience function to find the closest allied bot without having to specify extra parameters to [findEntities](FUNCTIONS:findEntities). Note that this returns `null` if there is no allied bot visible to the user."
+
+[findMyCpu]
+description = "A convenience function to find your CPU without having to specify extra parameters to [findEntities](FUNCTIONS:findEntities). Note that this returns `null` if the CPU is not visible to the user."
+
+[findMyClosestBot]
+description = "A convenience function to find the closest bot owned by you without having to specify extra parameters to [findEntities](FUNCTIONS:findEntities). Note that this returns `null` if there is no other bot owned by you visible to the user."
+
+[setAttackPriority]
+description = "Sets the priority in which bots will choose to attack *when there are multiple allowed targets of the same type*. This controls very narrow situations. For example, suppose your bot is surrounded by an enemy bot, an enemy chip, and the enemy CPU, and you use your Melee attack with no particular target. Because there are multiple valid targets, your attack priority will come into play. However, if the enemy CPU were 4 tiles away, it would no longer be a valid target for Melee, so your attack priority would only choose between chips and bots. The default attack priority is in terms of increasing threat to the user: is to prefer bots, then chips, then the CPU."
+
+  [setAttackPriority.bljs]
+  example = "setAttackPriority(BOT_CHIP_CPU);"
+
+    [[setAttackPriority.bljs.tags]]
+    kind = "param"
+    name = "priority"
+    type = "AttackPriority"
+    description = "Any of: `CHIP_CPU_BOT`, `CHIP_BOT_CPU`, `BOT_CHIP_CPU`, `BOT_CPU_CHIP`, `CPU_CHIP_BOT`, or `CPU_BOT_CHIP`. The attack priority is set in the order shown, e.g. `CHIP_CPU_BOT` will prefer chips, then the CPU, then bots. Note that these are literal values, *not* strings."
+
+[canSense]
+description = ""
+alias = "canSenseEntity"
+
+[canSenseEntity]
+description = "Checks if the user can sense the given entity. Sensing a target currently requires that it be in vision range, even if it's an entity owned by you. This means that you cannot always sense your own bots, chips, or your CPU. Cloaked enemies can only be sensed when they're on fire. Bots can \"see through\" entities though (i.e. bots can't form walls to block vision range)."
+
+  [canSenseEntity.bljs]
+  example = """
+if (canSenseEntity(entity))
+  pursue(entity);
+"""
+
+    [[canSenseEntity.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The target entity. If this is `null`, the function will return `false`."
+
+[exists]
+description = "Checks if the given value is not `null` and not `undefined`. This check is relatively ubiquitous in Bot Land; when you call something like [findClosestEnemyBot](FUNCTIONS:findClosestEnemyBot), you'll almost always find a corresponding call to check if it exists. The two biggest reasons why are: 1. A given entity may just *not* exist (e.g. you're trying to find the closest enemy bot even though you've destroyed them all). 2. The entity is not visible to the user (e.g. the closest enemy bot is outside of the vision range of your bot)."
+
+[isDefined]
+description = ""
+alias = "exists"
+
+[debugLog]
+description = "I'm writing these docs rather hastily, and this function is so complex that I'll leave this link [here](https://github.com/Adam13531/BotLand/wiki/Debugging). This function cannot be used on mobile unless you have your phone/tablet connected to your computer."
+
+[abs]
+description = "This is the same as `Math.abs` in most programming languages: gets the absolute value of a number."
+
+[floor]
+description = "This is the same as `Math.floor` in most programming languages: gets the rounded-down value of a number."
+
+[ceil]
+description = "This is the same as `Math.ceil` in most programming languages: gets the rounded-up value of a number."
+
+[min]
+description = "This is the same as `Math.min` in most programming languages: gets the minimum of all specified numbers."
+
+[max]
+description = "This is the same as `Math.max` in most programming languages: gets the maximum of all specified numbers."
+
+[round]
+description = "This is the same as `Math.round` in most programming languages: gets the rounded value of a number."
+
+[clampNumber]
+description = "Clamps a number between a specified minimum and maximum."
+
+  [clampNumber.bljs]
+  example = "clamped = clampNumber(value, 1, 10);"
+
+    [[clampNumber.bljs.tags]]
+    kind = "param"
+    name = "number"
+    type = "number"
+    description = "The number to clamp"
+
+    [[clampNumber.bljs.tags]]
+    kind = "param"
+    name = "min"
+    type = "number"
+    description = "The lowerbound to clamp to"
+
+    [[clampNumber.bljs.tags]]
+    kind = "param"
+    name = "max"
+    type = "number"
+    description = "The upperbound to clamp to"

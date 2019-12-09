@@ -1,0 +1,288 @@
+[move]
+description = "Moves a single tile away from the current location."
+
+  [move.bljs]
+  example = "move('left')"
+
+    [[move.bljs.tags]]
+    kind = "param"
+    name = "direction"
+    type = "Direction"
+    description = "Any of: `right`, `left`, `up`, `down`, `forward`, `backward`, or leave blank to move randomly"
+
+  [move.blockly]
+  example = """
+<block type="terminator_move">
+  <field name="DIRECTION">left</field>
+</block>
+"""
+
+[teleport]
+description = "Teleports your bot to the target location or entity. This requires Teleport hardware."
+
+  [[teleport.bljs]]
+  example = """
+// With coordinates...
+teleport(x + 5, y);
+"""
+
+    [[teleport.bljs.tags]]
+    kind = "param"
+    name = "xCoord"
+    type = "number"
+    description = "The X coordinate of the tile to teleport to"
+
+    [[teleport.bljs.tags]]
+    kind = "param"
+    name = "yCoord"
+    type = "number"
+    description = "The Y coordinate of the tile to teleport to"
+
+  [[teleport.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy) && getDistanceTo(closestEnemy) <= 5)
+  teleport(closestEnemy);
+"""
+
+    [[teleport.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The entity to teleport to (can be friend or foe). If specified, then you do not need to specify `xCoord` or `yCoord`."
+
+[figureItOut]
+description = "The default logic for a bot. This will try using all different hardware (weapons and support abilities), find enemies, move, etc. This can be added to any partial script, but keep in mind that it may try doing something that you don't want. For example, if you do NOT want to fire lasers, then you should not add `figureItOut`."
+
+  [figureItOut.bljs]
+  example = "figureItOut()"
+
+[layMine]
+description = "Lays a landmine directly beneath the bot."
+
+  [layMine.bljs]
+  example = "layMine()"
+
+[moveTo]
+description = "Attempts to find a path to the target location or entity."
+
+  [[moveTo.bljs]]
+  example = """
+// With coordinates...
+moveTo(4, 3); // (0, 0) is the top left of the Arena
+"""
+
+    [[moveTo.bljs.tags]]
+    kind = "param"
+    name = "xCoord"
+    type = "number"
+    description = "The X coordinate of the tile to move to"
+
+    [[moveTo.bljs.tags]]
+    kind = "param"
+    name = "yCoord"
+    type = "number"
+    description = "The Y coordinate of the tile to move to"
+
+  [[moveTo.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy))
+  moveTo(closestEnemy);
+"""
+
+    [[moveTo.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "The entity to move to (can be friend or foe). If specified, then you do not need to specify `xCoord` or `yCoord`."
+
+[emp]
+description = ""
+alias = "EMP"
+
+[EMP]
+description = "EMP affects all enemy bots in its area. Any affected bot trying to use the EMP'd hardware will be stunned for 2 turns, and there is no way to tell if you are currently under the effects of EMP (or else EMP would have no real effect!). Using EMP on activated hardware like Cloaking or Zapper will only prevent that hardware from being used; it will not disable the current effect. This requires EMP hardware."
+
+  [EMP.bljs]
+  example = "EMP('LASERS')"
+
+    [[EMP.bljs.tags]]
+    kind = "param"
+    name = "hardware"
+    type = "string"
+    description = "Any of: `LASERS`, `MISSILES`, `MELEE`, `ARTILLERY`, `ZAPPER`, `REPAIR`, `CLOAKING`, `SHIELD`, `REFLECT`, `TELEPORT`, `LANDMINES`, or `EMP`."
+
+[cloak]
+description = "This requires Cloaking hardware. Cloaks your bot for the hardware's duration. Cloaked bots that are on fire are visible despite still being cloaked. The only way to prematurely *decloak* an enemy is to attempt to move or teleport into it."
+
+  [cloak.bljs]
+  example = "cloak()"
+
+[zap]
+description = "Activates your Zapper for its duration. This requires Zapper hardware."
+
+  [zap.bljs]
+  example = "zap()"
+
+[reflect]
+description = "Activates your Reflect for its duration. This requires Reflect hardware."
+
+  [reflect.bljs]
+  example = "reflect()"
+
+[shield]
+description = "Activates your Shield for its duration. This requires Shield hardware."
+
+  [shield.bljs]
+  example = "shield()"
+
+    [[shield.bljs.tags]]
+    kind = "param"
+    name = "target"
+    type = "Entity"
+    description = "If specified, this will attempt to shield the target. If unspecified, this will attempt to shield the user."
+
+[activateSensors]
+description = "Activates sensors for this bot. Sensors increase the user's vision range by 2 tiles for 3 turns, then it's on cooldown for 6 turns. All bots have access to this."
+
+  [activateSensors.bljs]
+  example = "activateSensors()"
+
+[pursueBot]
+description = ""
+alias = "moveTo"
+
+[pursue]
+description = ""
+alias = "moveTo"
+
+[melee]
+description = "Attempts to use Melee in the direction or on the target. Melee hardware grants the ability to charge as well, which allows the user to move *and* attack in the same turn as long as the target is two tiles away in a cardinal direction. This requires Melee hardware."
+
+  [[melee.bljs]]
+  example = """
+// Melee any target that is within range
+melee();
+"""
+
+    [[melee.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "A foe to attack. If specified, then you do not need to specify `direction`."
+
+  [[melee.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy))
+  melee(closestEnemy);
+"""
+
+    [[melee.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "A foe to attack. If specified, then you do not need to specify `direction`."
+
+[repair]
+description = "Repairs the target. This requires Repair hardware."
+
+  [repair.bljs]
+  example = "repair()"
+
+    [[repair.bljs.tags]]
+    kind = "param"
+    name = "target"
+    type = "Entity"
+    description = "If specified, this will attempt to repair the target. If unspecified, this will attempt to repair the user."
+
+[fireLasers]
+description = "Attempts to use fire Lasers in the direction or at the target. Lasers can be blindly fired without a target and they will hit cloaked enemies. This requires Lasers hardware."
+
+  [[fireLasers.bljs]]
+  example = """
+// Fire lasers at any target that is within range
+fireLasers();
+"""
+
+  [[fireLasers.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy))
+  fireLasers(closestEnemy);
+"""
+
+    [[fireLasers.bljs.tags]]
+    kind = "param"
+    name = "direction"
+    type = "Direction"
+    description = "Any of: `right`, `left`, `up`, `down`, `forward`, `backward`, or leave blank to find a valid target"
+
+    [[fireLasers.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "A foe to attack. If specified, then you do not need to specify `direction`."
+
+[fireArtillery]
+description = "Fires Artillery at the target. Artillery has a travel time (unlike Lasers or Missiles) and a minimum range. This requires Artillery hardware."
+
+  [[fireArtillery.bljs]]
+  example = """
+// Fire Artillery at any target that is within range
+fireArtillery();
+"""
+
+  [[fireArtillery.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy))
+  fireArtillery(closestEnemy);
+"""
+
+    [[fireArtillery.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "An optional foe to attack."
+
+[fireMissiles]
+description = "Fires Missiles at the target. This requires Missiles hardware. If Multi Missiles is equipped, you'll hit all targets in range."
+
+  [[fireMissiles.bljs]]
+  example = """
+// Fire Missiles at any target that is within range
+fireMissiles();
+"""
+
+  [[fireMissiles.bljs]]
+  example = """
+// With target entity...
+closestEnemy = findEntity(ENEMY, BOT, SORT_BY_DISTANCE, SORT_ASCENDING);
+if (exists(closestEnemy))
+  fireMissiles(closestEnemy);
+"""
+
+    [[fireMissiles.bljs.tags]]
+    kind = "param"
+    name = "entity"
+    type = "Entity"
+    description = "An optional foe to attack."
+
+[taunt]
+description = "Taunts your enemy by wasting a turn to show an emoji."
+
+  [taunt.bljs]
+  example = "taunt('LAUGHING');"
+
+    [[taunt.bljs.tags]]
+    kind = "param"
+    name = "emojiCode"
+    type = "string"
+    description = "An optional emoji code from `LAUGHING`, `ANGRY`, `CRYING`, `THUMBS_UP`, or `THUMBS_DOWN`. If not provided, a random one will be chosen."

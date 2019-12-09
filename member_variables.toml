@@ -1,0 +1,11 @@
+[x]
+description = "The X coordinate of this entity. This is the same as a call to [getX](FUNCTIONS:getX)."
+
+[y]
+description = "The Y coordinate of this entity. This is the same as a call to [getY](FUNCTIONS:getY)."
+
+[life]
+description = "The life of this entity. This is the same as a call to [getLife](FUNCTIONS:getLife)."
+
+[lifePercent]
+description = "The life percentage of this entity. This is the same as a call to [getLifePercent](FUNCTIONS:getLifePercent)."

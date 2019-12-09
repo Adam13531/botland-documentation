@@ -1,0 +1,11 @@
+{
+  "editor": "0.2.0",
+  "categories": [
+    "arrays",
+    "functions",
+    "member_variables",
+    "shared_variables",
+    "terminators",
+    "variables"
+  ]
+}
