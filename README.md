@@ -31,10 +31,10 @@ If you have any new issues, please [report them](https://github.com/Adam13531/bo
 
 For example, this error:
 
-> git@github.com: Permission denied (publickey).
+> git@github.com: Permission denied (publickey).  
 > fatal: Could not read from remote repository.
-
-> Please make sure you have the correct access rights
+>  
+> Please make sure you have the correct access rights  
 > and the repository exists.
 
 For me, this showed up when using CMD on Windows. To fix it, I had to launch the application from `bash` with `ssh-agent` running. This probably indicates an issue with your Git configuration though, for which [this guide](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) may help.
