@@ -14,7 +14,7 @@ description = "The current life percentage of the user. This is a number between
 description = "A boolean representing whether the user is an attacker or a defender. Blueprints and scripts cannot be shared between attackers and defenders, but some examples or snippets that you'll find in Bot Land are agnostic to which side you're on. You should typically have no reason to use this."
 
 [turnNumber]
-description = "The total number of turns that have occurred since the beginning of the round. This starts at 0 for each round and will go up every time any bot gets a turn (including the enemy's bots)."
+description = "The total number of turns that have occurred since the beginning of the match. This starts at 0 and will go up every time any bot gets a turn (including the enemy's bots)."
 
 [arenaWidth]
 description = "The width of the Arena. The rightmost navigable tile has an X coordinate of `arenaWidth - 1`."
