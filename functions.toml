@@ -1,5 +1,5 @@
 [getX]
-description = "Gets the X coordinate of an `Entity`. This is the same as `entity.x` in code. If the entity is outside the bot's vision range `NaN` will be returned instead."
+description = "Gets the X coordinate of an `Entity`. This is the same as `entity.x` in code. If the entity is outside the bot's vision range, `NaN` will be returned instead."
 
   [getX.bljs]
   example = "getX(entity)"
@@ -11,7 +11,7 @@ description = "Gets the X coordinate of an `Entity`. This is the same as `entity
     description = "The target entity"
 
 [getY]
-description = "Gets the Y coordinate of an `Entity`. This is the same as `entity.y` in code. If the entity is outside the bot's vision range `NaN` will be returned instead."
+description = "Gets the Y coordinate of an `Entity`. This is the same as `entity.y` in code. If the entity is outside the bot's vision range, `NaN` will be returned instead."
 
   [getY.bljs]
   example = "getY(entity)"
@@ -23,7 +23,7 @@ description = "Gets the Y coordinate of an `Entity`. This is the same as `entity
     description = "The target entity"
 
 [getLife]
-description = "Gets the current life of an `Entity`. This is the same as `entity.life` in code. Bots have 2000 max life, chips have 4000, and the CPU has 16000. If the entity is outside the bot's vision range `NaN` will be returned instead."
+description = "Gets the current life of an `Entity`. This is the same as `entity.life` in code. Bots have 2000 max life, chips have 4000, and the CPU has 16000. If the entity is outside the bot's vision range, `NaN` will be returned instead."
 
   [getLife.bljs]
   example = "getLife(entity)"
@@ -35,7 +35,7 @@ description = "Gets the current life of an `Entity`. This is the same as `entity
     description = "The target entity"
 
 [getLifePercent]
-description = "Gets the current life percentage of an `Entity`. This returns a number between `0` and `100`, e.g. `75` represents 75% life. If the entity is outside the bot's vision range `NaN` will be returned instead."
+description = "Gets the current life percentage of an `Entity`. This returns a number between `0` and `100`, e.g. `75` represents 75% life. If the entity is outside the bot's vision range, `NaN` will be returned instead."
 
   [getLifePercent.bljs]
   example = "getLifePercent(entity)"
