@@ -1,0 +1,18 @@
+[Melee]
+description = "A snippet that will check if a melee attack would hit before eventually using melee."
+
+  [Melee.blockly]
+  example = """
+<block type="conditional_terminator_melee_direction">
+  <field name="DIRECTION">left</field>
+</block>
+"""
+
+["Repair self"]
+description = "A snippet that will check if you need healing before eventually using repair on yourself."
+
+  ["Repair self".blockly]
+  example = """
+<block type="conditional_terminator_repair_self">
+</block>
+"""

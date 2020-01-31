@@ -7,5 +7,16 @@
     "shared_variables",
     "terminators",
     "variables"
-  ]
+  ],
+  "pages": {
+    "before": [
+      {
+        "file": "snippets",
+        "icon": "fas/traffic-light-go",
+        "description": "Terminators but easier (only available in the block editor).",
+        "name": "Snippets"
+      }
+    ],
+    "after": []
+  }
 }
