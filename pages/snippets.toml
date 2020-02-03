@@ -1,0 +1,205 @@
+["Pursue entity"]
+description = "Pursues the specified target if it can be found (which means it must be in vision range). See [canMoveTo](FUNCTIONS:canMoveTo) and [pursue](TERMINATORS:pursue)."
+
+  ["Pursue entity".blockly]
+  example = """
+<block type="conditional_terminator_pursue_generic">
+</block>
+"""
+
+[Move]
+description = "Moves in the specified direction as long as it is not blocked by an obstruction that the user can see. See [canMove](FUNCTIONS:canMove) and [move](TERMINATORS:move)."
+
+  [Move.blockly]
+  example = """
+<block type="conditional_terminator_move">
+</block>
+"""
+
+["Teleport to location"]
+description = "Teleports to the specified coordinates as long as they're within the range of your Teleport hardware. If the tile is occupied, this will find the closest unoccupied tile. See [canTeleport](FUNCTIONS:canTeleport) and [teleport](TERMINATORS:teleport)."
+
+  ["Teleport to location".blockly]
+  example = """
+<block type="conditional_terminator_teleport_to_tile"><value name="X_VALUE"><block type="math_arithmetic"><field name="OP">ADD</field><value name="A"><block type="builtin_x"/></value><value name="B"><block type="math_number"><field name="NUM">5</field></block></value></block></value><value name="Y_VALUE"><block type="math_arithmetic"><field name="OP">ADD</field><value name="A"><block type="builtin_y"/></value><value name="B"><block type="math_number"><field name="NUM">0</field></block></value></block></value></block>
+"""
+
+["Teleport to entity"]
+description = "Teleports to the specified entity as long as they're within the range of your vision, your Teleport hardware's range, and they're farther than two tiles away (because otherwise, it would likely be a waste of your Teleport's cooldown). See [canTeleport](FUNCTIONS:canTeleport) and [teleport](TERMINATORS:teleport)."
+
+  ["Teleport to entity".blockly]
+  example = """
+<block type="conditional_terminator_teleport_to_entity">
+</block>
+"""
+
+["Fire Lasers in direction"]
+description = "Fires Lasers in the specified direction only if it will result in a confirmed hit. This means that there must be a visible enemy within the range of your Lasers hardware. See [willLasersHit](FUNCTIONS:willLasersHit) and [fireLasers](TERMINATORS:fireLasers)."
+
+  ["Fire Lasers in direction".blockly]
+  example = """
+<block type="conditional_terminator_fire_lasers">
+</block>
+"""
+
+["Fire Lasers at entity"]
+description = "Fires Lasers at the specified entity if it can be found. See [willLasersHit](FUNCTIONS:willLasersHit) and [fireLasers](TERMINATORS:fireLasers)."
+
+  ["Fire Lasers at entity".blockly]
+  example = """
+<block type="conditional_terminator_lasers_specific_target">
+</block>
+"""
+
+["Fire Missiles"]
+description = "Fires Missiles only if it will result in a confirmed hit. See [willMissilesHit](FUNCTIONS:willMissilesHit) and [fireMissiles](TERMINATORS:fireMissiles)."
+
+  ["Fire Missiles".blockly]
+  example = """
+<block type="conditional_terminator_fire_missiles">
+</block>
+"""
+
+["Fire Missiles at entity"]
+description = "Fires Missiles at the specified entity if it can be found. See [willMissilesHit](FUNCTIONS:willMissilesHit) and [fireMissiles](TERMINATORS:fireMissiles)."
+
+  ["Fire Missiles at entity".blockly]
+  example = """
+<block type="conditional_terminator_missiles_specific_target">
+</block>
+"""
+
+["Fire Artillery"]
+description = "Fires Artillery only if it will result in a confirmed hit. See [willArtilleryHit](FUNCTIONS:willArtilleryHit) and [fireArtillery](TERMINATORS:fireArtillery)."
+
+  ["Fire Artillery".blockly]
+  example = """
+<block type="conditional_terminator_fire_artillery">
+</block>
+"""
+
+["Fire Artillery at entity"]
+description = "Fires Artillery at the specified entity if it can be found. See [willArtilleryHit](FUNCTIONS:willArtilleryHit) and [fireArtillery](TERMINATORS:fireArtillery)."
+
+  ["Fire Artillery at entity".blockly]
+  example = """
+<block type="conditional_terminator_fire_artillery_specific_target">
+</block>
+"""
+
+["Melee in direction"]
+description = "Uses Melee in the specified direction only if it will result in a confirmed hit. See [willMeleeHit](FUNCTIONS:willMeleeHit) and [melee](TERMINATORS:melee)."
+
+  ["Melee in direction".blockly]
+  example = """
+<block type="conditional_terminator_melee_direction">
+</block>
+"""
+
+["Melee entity"]
+description = "Uses Melee on the specified entity if it can be found. See [willMeleeHit](FUNCTIONS:willMeleeHit) and [melee](TERMINATORS:melee)."
+
+  ["Melee entity".blockly]
+  example = """
+<block type="conditional_terminator_melee_specific_target">
+</block>
+"""
+
+[Zap]
+description = "Activates Zapper if it is not on cooldown. See [canZap](FUNCTIONS:canZap) and [zap](TERMINATORS:zap)."
+
+  [Zap.blockly]
+  example = """
+<block type="conditional_terminator_zap">
+</block>
+"""
+
+["Lay mine"]
+description = "Lays a Landmine if there isn't already one at the current tile. See [canLayMine](FUNCTIONS:canLayMine) and [layMine](TERMINATORS:layMine)."
+
+  ["Lay mine".blockly]
+  example = """
+<block type="conditional_terminator_lay_mine">
+</block>
+"""
+
+[Cloak]
+description = "Activates Cloaking if it is not on cooldown. See [canCloak](FUNCTIONS:canCloak) and [cloak](TERMINATORS:cloak)."
+
+  [Cloak.blockly]
+  example = """
+<block type="conditional_terminator_cloak">
+</block>
+"""
+
+[Reflect]
+description = "Activates Reflect if it is not on cooldown. See [canReflect](FUNCTIONS:canReflect) and [reflect](TERMINATORS:reflect)."
+
+  [Reflect.blockly]
+  example = """
+<block type="conditional_terminator_reflect">
+</block>
+"""
+
+[EMP]
+description = "Activates EMP if it is not on cooldown. See [canEMP](FUNCTIONS:canEMP) and [EMP](TERMINATORS:EMP)."
+
+  [EMP.blockly]
+  example = """
+<block type="conditional_terminator_emp">
+</block>
+"""
+
+["Shield self"]
+description = "Activates a shield on the user if it is not on cooldown. See [canShield](FUNCTIONS:canShield) and [shield](TERMINATORS:shield)."
+
+  ["Shield self".blockly]
+  example = """
+<block type="conditional_terminator_shield_self">
+</block>
+"""
+
+["Shield ally"]
+description = "Activates a shield on the target if the Shield hardware is not on cooldown. See [canShield](FUNCTIONS:canShield) and [shield](TERMINATORS:shield)."
+
+  ["Shield ally".blockly]
+  example = """
+<block type="conditional_terminator_shield_ally">
+</block>
+"""
+
+["Repair self"]
+description = "Repairs the user if the user does not have full life and the Repair hardware is not on cooldown. See [willRepair](FUNCTIONS:willRepair) and [repair](TERMINATORS:repair)."
+
+  ["Repair self".blockly]
+  example = """
+<block type="conditional_terminator_repair_self">
+</block>
+"""
+
+["Repair ally"]
+description = "Repairs the closest ally to the user with the lowest life. The ally needs to be within the range of your Repair hardware. See [willRepair](FUNCTIONS:willRepair) and [repair](TERMINATORS:repair)."
+
+  ["Repair ally".blockly]
+  example = """
+<block type="conditional_terminator_repair_ally">
+</block>
+"""
+
+["Repair all"]
+description = "Repairs all allies within the range of your Repair hardware if the total amount of missing life is more than 100. See [willRepair](FUNCTIONS:willRepair) and [repair](TERMINATORS:repair)."
+
+  ["Repair all".blockly]
+  example = """
+<block type="conditional_terminator_repair_all">
+</block>
+"""
+
+["Activate sensors"]
+description = "Activates sensors for this bot if they're not on cooldown. See [canActivateSensors](FUNCTIONS:canActivateSensors) and [activateSensors](TERMINATORS:activateSensors)."
+
+  ["Activate sensors".blockly]
+  example = """
+<block type="conditional_terminator_activate_sensors">
+</block>
+"""
