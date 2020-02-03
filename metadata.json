@@ -13,7 +13,7 @@
       {
         "file": "snippets",
         "icon": "fas/traffic-light-go",
-        "description": "Terminators but easier (only available in the block editor).",
+        "description": "All snippets conditionally run an action (where an action is something like moving, firing lasers, etc.). If the action is run, your bot's turn will end immediately, meaning no other blocks will be executed. Snippets are intended to be a simple introduction to Bot Land given that they're typically just a single block, meaning you can set up an entire script using snippets as a sort of priority system. Snippets are currently only available in the block-based editor.",
         "name": "Snippets"
       }
     ],
