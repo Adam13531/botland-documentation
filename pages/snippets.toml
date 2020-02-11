@@ -123,6 +123,29 @@ description = "Lays a Landmine if there isn't already one at the current tile. S
 </block>
 """
 
+["Self-destruct"]
+description = "Self-destructs if at least one target is within range. See [willSelfDestructHit](FUNCTIONS:willSelfDestructHit) and [selfDestruct](TERMINATORS:selfDestruct)."
+
+  ["Self-destruct".blockly]
+  example = """
+<block type="conditional_terminator_self_destruct">
+</block>
+"""
+
+["Self-destruct based on remaining life"]
+description = "Self-destructs if at least one target is within range and your life percentage is less than or equal to the specified value. See [willSelfDestructHit](FUNCTIONS:willSelfDestructHit) and [selfDestruct](TERMINATORS:selfDestruct)."
+
+  ["Self-destruct based on remaining life".blockly]
+  example = """
+<block type="conditional_terminator_self_destruct_at_life_percent">
+  <value name="LIFE_PERCENT">
+    <block type="math_number">
+      <field name="NUM">15</field>
+    </block>
+  </value>
+</block>
+"""
+
 [Cloak]
 description = "Activates Cloaking if it is not on cooldown. See [canCloak](FUNCTIONS:canCloak) and [cloak](TERMINATORS:cloak)."
 

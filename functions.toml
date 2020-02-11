@@ -499,6 +499,9 @@ if (exists(closestEnemy) && willLasersHit(closestEnemy))
     type = "Entity"
     description = "A foe to attack. If specified, then you do not need to specify `direction`."
 
+[willSelfDestructHit]
+description = "Checks if the target will be hit by the user's [self-destruct](TERMINATORS:selfDestruct). For this to return `true`, the user must have Self-destruct hardware and the target must be in range. If no target is specified, this will return `true` if *anything* in range will be hit."
+
 [willMeleeHit]
 description = "Checks if the target will be hit by the user's [melee](TERMINATORS:melee). For this to return `true`, the user must have Melee hardware and the target must be in range."
 

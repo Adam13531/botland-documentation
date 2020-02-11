@@ -286,3 +286,6 @@ if (exists(closestEnemy))
     name = "entity"
     type = "Entity"
     description = "An optional foe to attack."
+
+[selfDestruct]
+description = "Self-destructs, dealing damage to any enemies in range. This requires Self-destruct hardware. This takes no arguments."
